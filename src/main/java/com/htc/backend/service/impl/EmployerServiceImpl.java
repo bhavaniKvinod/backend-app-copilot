@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.Employer;
 import com.htc.backend.repository.EmployerRepository;
 import com.htc.backend.service.EmployerService;
@@ -60,7 +61,7 @@ public class EmployerServiceImpl implements EmployerService {
             employer.setUserId(employerId);
             return employerRepository.save(employer);
         }
-        throw new RuntimeException("Employer not found with ID: " + employerId);
+        throw new ResourceNotFoundException("Employer", "employerId", employerId);
     }
     
     @Override
@@ -68,7 +69,7 @@ public class EmployerServiceImpl implements EmployerService {
         if (employerRepository.existsById(employerId)) {
             employerRepository.deleteById(employerId);
         } else {
-            throw new RuntimeException("Employer not found with ID: " + employerId);
+            throw new ResourceNotFoundException("Employer", "employerId", employerId);
         }
     }
     

@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.User;
 import com.htc.backend.repository.UserRepository;
 import com.htc.backend.service.UserService;
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
             user.setUserId(userId);
             return userRepository.save(user);
         }
-        throw new RuntimeException("User not found with ID: " + userId);
+        throw new ResourceNotFoundException("User", "userId", userId);
     }
     
     @Override
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService {
         if (userRepository.existsById(userId)) {
             userRepository.deleteById(userId);
         } else {
-            throw new RuntimeException("User not found with ID: " + userId);
+            throw new ResourceNotFoundException("User", "userId", userId);
         }
     }
     

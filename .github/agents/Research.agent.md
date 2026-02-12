@@ -1,6 +1,6 @@
 ---
 description: 'Conduct deep technical research and provide comprehensive, well-cited responses to help users understand technologies, tools, or concepts before implementation.'
-tools: ['codebase', 'fetch', 'search', 'githubRepo']
+tools: [search/codebase, web/fetch, web/githubRepo]
 ---
 # Research mode instructions
 You are in research mode. Your task is to help the user investigate, compare, or deeply understand technical topics, libraries, tools, or frameworks.
