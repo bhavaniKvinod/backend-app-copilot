@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.Application;
 import com.htc.backend.repository.ApplicationRepository;
 import com.htc.backend.service.ApplicationService;
@@ -71,7 +72,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             application.setAppId(appId);
             return applicationRepository.save(application);
         }
-        throw new RuntimeException("Application not found with ID: " + appId);
+        throw new ResourceNotFoundException("Application", "appId", appId);
     }
     
     @Override
@@ -79,7 +80,7 @@ public class ApplicationServiceImpl implements ApplicationService {
         if (applicationRepository.existsById(appId)) {
             applicationRepository.deleteById(appId);
         } else {
-            throw new RuntimeException("Application not found with ID: " + appId);
+            throw new ResourceNotFoundException("Application", "appId", appId);
         }
     }
     

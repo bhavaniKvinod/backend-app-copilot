@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.Interview;
 import com.htc.backend.repository.InterviewRepository;
 import com.htc.backend.service.InterviewService;
@@ -76,7 +77,7 @@ public class InterviewServiceImpl implements InterviewService {
             interview.setInterviewId(interviewId);
             return interviewRepository.save(interview);
         }
-        throw new RuntimeException("Interview not found with ID: " + interviewId);
+        throw new ResourceNotFoundException("Interview", "interviewId", interviewId);
     }
     
     @Override
@@ -84,7 +85,7 @@ public class InterviewServiceImpl implements InterviewService {
         if (interviewRepository.existsById(interviewId)) {
             interviewRepository.deleteById(interviewId);
         } else {
-            throw new RuntimeException("Interview not found with ID: " + interviewId);
+            throw new ResourceNotFoundException("Interview", "interviewId", interviewId);
         }
     }
     

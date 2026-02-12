@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.Token;
 import com.htc.backend.repository.TokenRepository;
 import com.htc.backend.service.TokenService;
@@ -65,7 +66,7 @@ public class TokenServiceImpl implements TokenService {
             token.setId(tokenId);
             return tokenRepository.save(token);
         }
-        throw new RuntimeException("Token not found with ID: " + tokenId);
+        throw new ResourceNotFoundException("Token", "tokenId", tokenId);
     }
     
     @Override
@@ -76,7 +77,7 @@ public class TokenServiceImpl implements TokenService {
             t.setIsRevoked(true);
             tokenRepository.save(t);
         } else {
-            throw new RuntimeException("Token not found with ID: " + tokenId);
+            throw new ResourceNotFoundException("Token", "tokenId", tokenId);
         }
     }
     
@@ -88,7 +89,7 @@ public class TokenServiceImpl implements TokenService {
             t.setIsExpired(true);
             tokenRepository.save(t);
         } else {
-            throw new RuntimeException("Token not found with ID: " + tokenId);
+            throw new ResourceNotFoundException("Token", "tokenId", tokenId);
         }
     }
     
@@ -97,7 +98,7 @@ public class TokenServiceImpl implements TokenService {
         if (tokenRepository.existsById(tokenId)) {
             tokenRepository.deleteById(tokenId);
         } else {
-            throw new RuntimeException("Token not found with ID: " + tokenId);
+            throw new ResourceNotFoundException("Token", "tokenId", tokenId);
         }
     }
     

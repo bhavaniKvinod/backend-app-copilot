@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.JobSeeker;
 import com.htc.backend.repository.JobSeekerRepository;
 import com.htc.backend.service.JobSeekerService;
@@ -60,7 +61,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
             jobSeeker.setUserId(seekerId);
             return jobSeekerRepository.save(jobSeeker);
         }
-        throw new RuntimeException("Job Seeker not found with ID: " + seekerId);
+        throw new ResourceNotFoundException("Job Seeker", "seekerId", seekerId);
     }
     
     @Override
@@ -68,7 +69,7 @@ public class JobSeekerServiceImpl implements JobSeekerService {
         if (jobSeekerRepository.existsById(seekerId)) {
             jobSeekerRepository.deleteById(seekerId);
         } else {
-            throw new RuntimeException("Job Seeker not found with ID: " + seekerId);
+            throw new ResourceNotFoundException("Job Seeker", "seekerId", seekerId);
         }
     }
     

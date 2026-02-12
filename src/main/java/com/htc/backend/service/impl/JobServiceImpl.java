@@ -1,5 +1,6 @@
 package com.htc.backend.service.impl;
 
+import com.htc.backend.exception.ResourceNotFoundException;
 import com.htc.backend.model.Job;
 import com.htc.backend.repository.JobRepository;
 import com.htc.backend.service.JobService;
@@ -71,7 +72,7 @@ public class JobServiceImpl implements JobService {
             job.setJobId(jobId);
             return jobRepository.save(job);
         }
-        throw new RuntimeException("Job not found with ID: " + jobId);
+        throw new ResourceNotFoundException("Job", "jobId", jobId);
     }
     
     @Override
@@ -79,7 +80,7 @@ public class JobServiceImpl implements JobService {
         if (jobRepository.existsById(jobId)) {
             jobRepository.deleteById(jobId);
         } else {
-            throw new RuntimeException("Job not found with ID: " + jobId);
+            throw new ResourceNotFoundException("Job", "jobId", jobId);
         }
     }
     
